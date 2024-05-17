@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "spooky"
+version = "0.1.0"
+description = "A SatQKD modelling and simulation software"
+authors = ["Inaki Ortiz de Landaluce <inaki.ortizdelandaluce@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+spiceypy = "^6.0.0"
+scipy = "^1.13.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
