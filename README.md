@@ -1,5 +1,4 @@
-<img src="https://github.com/inaki-ortizdelandaluce/spooky/blob/main/icons/spookey.png?raw=true" width="100px"/>
+<img src="https://github.com/inaki-ortizdelandaluce/spooky/blob/main/icons/spooky-full-jelly.png?raw=true" height="250px"/>
 
-# spooky
-A Satellite QKD modelling and simulation software
+# Spooky: A Satellite QKD modelling and simulation software
 
