@@ -1,6 +1,6 @@
-from ..units.magnitude import Magnitude
-from ..utils.array import null_or_empty
-from filter import SpectralFilter, IdealBandPassFilter
+from spooky.units.magnitude import Magnitude
+from spooky.utils.array import null_or_empty
+from spooky.components.filter import SpectralFilter, IdealBandPassFilter
 import json
 import math
 import numpy as np
@@ -160,7 +160,8 @@ class Detector:
             raise TypeError("Spectral filter can either be a SpectralFilter object or a filter width in nm")
 
         # set detection efficiency
-        # self.efficiency = self.get_detection_efficiency(self.wavelength_range, self.wavelength)
+        self.detection_efficiency = self.get_detection_efficiency(self.wavelength_range, self.efficiencies,
+                                                                  self.wavelength)
         # set jitter CDF and PDF
         # self.cdf, self.pdf = self.get_jitter_density_functions(self)
         # set jitter QBER and loss
@@ -336,18 +337,18 @@ class Detector:
         self._efficiencies = values
 
     @property
-    def efficiency(self):
-        return self._efficiency
+    def detection_efficiency(self):
+        return self._detection_efficiency
 
-    @efficiency.setter
-    def efficiency(self, value):
+    @detection_efficiency.setter
+    def detection_efficiency(self, value):
         if not np.issubdtype(value.dtype, np.number):
             raise TypeError("Efficiency value must be numeric.")
 
         if value < 0 or value > 1:
             raise ValueError("Efficiency value must be between 0 and 1.")
 
-        self._efficiency = value
+        self._detection_efficiency = value
 
     @staticmethod
     def set_detection_efficiency(detector, **kwargs):

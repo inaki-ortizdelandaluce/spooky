@@ -1,5 +1,5 @@
 import numpy as np
-from ..units.magnitude import Magnitude
+from spooky.units.magnitude import Magnitude
 
 
 class SpectralFilter:

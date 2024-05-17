@@ -10,6 +10,7 @@ readme = "README.md"
 python = "^3.11"
 spiceypy = "^6.0.0"
 scipy = "^1.13.0"
+matplotlib = "^3.9.0"
 
 [build-system]
 requires = ["poetry-core"]
