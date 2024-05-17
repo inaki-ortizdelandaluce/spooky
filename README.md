@@ -1,2 +1,2 @@
 # spooky
-Satellite QKD simulation software
+A Satellite QKD modelling and simulation software
