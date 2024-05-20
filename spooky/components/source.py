@@ -15,7 +15,6 @@ class Source:
                  g2=0.01,
                  probability_signal=1,
                  **kwargs):
-        self.wavelength = wavelength
         self.wavelength_scale = wavelength_scale
         self.repetition_rate = repetition_rate
         self.efficiency = efficiency
@@ -40,7 +39,6 @@ class Source:
                              f"\nVacuum={1 - (self.probability_signal + self.probability_decoy)}")
         else:
             self.probability_vacuum = 1 - (self.probability_signal + self.probability_decoy)
-
 
     @property
     def wavelength(self):
