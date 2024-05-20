@@ -1,3 +1,5 @@
+## Source
+
 ## Detector
 
 #### Time Gate Width 
@@ -12,3 +14,5 @@ The period of time immediately following the detection of a photon during which 
 
 #### Repetition Time
 The number of photon pulses arriving at the detector per unit time. It indicates how frequently the detector is exposed to photon pulses.
+
+## Telescope
