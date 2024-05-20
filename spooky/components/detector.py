@@ -414,7 +414,7 @@ class Detector:
          """
         # convert time measures into index increments
         time_gate_width_idx = 2 * round(self.time_gate_width / (2 * self.histogram_bin_width))
-        repetition_period_idx = round(1 / self.repetition_rate * self.histogram_bin_width)
+        repetition_period_idx = round(1 / (self.repetition_rate * self.histogram_bin_width))
 
         # check rounding precision
         if time_gate_width_idx < 10:

@@ -64,6 +64,41 @@ class SpectralFilter:
             raise TypeError("Wavelength scale is not an instance of Magnitude")
         self._wavelength_scale = value
 
+    @staticmethod
+    def compute_transmission(filters: list,
+                             wavelengths: np.ndarray):
+        """
+        Compute transmission from a spectral filter list at the specified wavelengths.
+
+        Args:
+            filters (list): A list of spectral filters
+            wavelengths (numpy.ndarray): A 1D array of wavelengths.
+
+        Returns:
+            numpy.ndarray: A 2D array of transmissions.
+        """
+        if not isinstance(filters, list) and not all(isinstance(item, SpectralFilter) for item in filters):
+            raise TypeError("Filters must be a list of SpectralFilter objects")
+
+        if not isinstance(wavelengths, np.ndarray) or wavelengths.ndim != 1:
+            raise ValueError('Wavelengths must be formatted as a 1D numpy array')
+
+        transmission = np.zeros((len(wavelengths), len(filters)))
+
+        for i, f in enumerate(filters):
+            if len(f.wavelengths) == 1 and np.array_equal(f.wavelengths, wavelengths):
+                transmission[:, i] = f.transmission
+            else:
+                from scipy.interpolate import interp1d
+                interp_func = interp1d(f.wavelengths,
+                                       f.transmission,
+                                       kind='linear',
+                                       bounds_error=False,
+                                       fill_value=0)
+                transmission[:, i] = interp_func(wavelengths)
+
+        return transmission
+
 
 class IdealBandPassFilter(SpectralFilter):
 
