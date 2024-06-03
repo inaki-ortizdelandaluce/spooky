@@ -3,8 +3,10 @@
 # spookey: A satellite QKD modelling and simulation software
 
 ````
->> cd /to/root/folder
->> folder_to_add = 'Examples';
+Files (Right Click) > Source Control > Clone Git Repository
+URL: https://github.com/Free-Space-QKD-Lab-HWU/Qrackling.git
+Folders location: /MATLAB Drive/Qrackling-YYYMMDD
+>> cd Qrackling-YYYMMDD
 >> examples_path = genpath('Examples');
 >> uplink_path = genpath('uplink_adaptive_optics');
 >> addpath(examples_path);

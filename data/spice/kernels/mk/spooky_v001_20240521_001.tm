@@ -46,12 +46,13 @@ Implementation Notes
 
                            '$KERNELS/fk/earth_topo_201023.tf'
                            '$KERNELS/fk/earthfixeditrf93.tf'
-                           '$KERNELS/fk/earthstns_jaxa_20230905'
+                           '$KERNELS/fk/earthstns_jaxa_20230905.tf'
                            '$KERNELS/fk/estrack_v04.tf'
+                           '$KERNELS/fk/spooky_gs_v00.tf'
 
                            '$KERNELS/lsk/naif0012.tls'
 
-                           '$KERNELS/pck/de403-masses.tpc'
+                           '$KERNELS/pck/de403_masses.tpc'
                            '$KERNELS/pck/pck00011.tpc'
 
                            '$KERNELS/pck/earth_070425_370426_predict.bpc'
@@ -61,6 +62,10 @@ Implementation Notes
                            '$KERNELS/spk/earthstns_itrf93_201023.bsp'
                            '$KERNELS/spk/earthstns_jaxa_20230905.bsp'
                            '$KERNELS/spk/estrack_v04.bsp'
+
+                           '$KERNELS/spk/ISS.bsp'
+                           '$KERNELS/spk/spooky_gs_v00.bsp'
+                           '$KERNELS/spk/matlab.bsp'
 
                          )
 

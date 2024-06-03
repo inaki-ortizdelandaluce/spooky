@@ -1,5 +1,5 @@
 from spooky.units.magnitude import Magnitude
-from spooky.utils.array import null_or_empty
+from spooky.utils.arrays import null_or_empty
 from spooky.components.filter import SpectralFilter, IdealBandPassFilter
 import json
 import math
