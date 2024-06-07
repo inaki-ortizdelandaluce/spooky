@@ -82,6 +82,9 @@ class Telescope:
             raise TypeError("Wavelength must be numeric.")
         self._wavelength = value
 
+    def set_wavelength(self, wavelength, wavelength_scale: Magnitude):
+        self.wavelength = Magnitude.convert(wavelength_scale, Magnitude.nano, wavelength)
+
     @property
     def wavelength_scale(self):
         return self._wavelength_scale

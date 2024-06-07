@@ -178,3 +178,75 @@ if __name__ == '__main__':
     for i in range(count):
         window_start, window_end = spiceypy.wnfetd(result, i)
         print(f"Window {i+1}:{sp.et2utc(window_start)} - {sp.et2utc(window_end)}")
+
+    import spiceypy
+    from spooky.utils.spice import Spice
+    import numpy as np
+
+    sp = Spice()
+    sp.load_metakernel('/Users/iortiz/spice/kernels/spooky/mk/spooky_ops.tm')
+    _, radii = spiceypy.bodvrd('EARTH', 'RADII', 3)
+    re = radii[0]
+    rp = radii[2]
+    f = (re - rp) / re
+
+    lon = spiceypy.convrt(118.0, 'DEGREES', 'RADIANS')
+    lat = spiceypy.convrt(30, 'DEGREES', 'RADIANS')
+    alt = 0.0
+
+    x, y, z = spiceypy.georec(lon, lat, alt, re, f)
+
+    lla0 = [46.017, 7.750, 1673]  # Zermatt, Switzerland
+    lla = [45.976, 7.658, 4531]  # Matterhorn, , Switzerland
+    pos0 = spiceypy.georec(spiceypy.convrt(lla0[1], 'DEGREES', 'RADIANS'),
+                           spiceypy.convrt(lla0[0], 'DEGREES', 'RADIANS'),
+                           lla0[2]/1000, re, f)
+    pos1 = spiceypy.georec(spiceypy.convrt(lla[1], 'DEGREES', 'RADIANS'),
+                           spiceypy.convrt(lla[0], 'DEGREES', 'RADIANS'),
+                           lla[2] / 1000, re, f)
+    dxyz = np.array(pos1) - np.array(pos0)
+
+    def ecef_to_enu_matrix(lat_rad, lon_rad):
+        """
+        Rotation matrix to convert from Earth-Centered Earth-Fixed Frame (ECEF/ITRF93)
+        to Earth Topocentric
+        """
+        sin_lat = np.sin(lat_rad)
+        cos_lat = np.cos(lat_rad)
+        sin_lon = np.sin(lon_rad)
+        cos_lon = np.cos(lon_rad)
+
+        return np.array([
+            [-sin_lon, cos_lon, 0],
+            [-sin_lat * cos_lon, -sin_lat * sin_lon, cos_lat],
+            [cos_lat * cos_lon, cos_lat * sin_lon, sin_lat]
+        ])
+
+
+    rotation_matrix = ecef_to_enu_matrix(spiceypy.convrt(lla0[0], 'DEGREES', 'RADIANS'),
+                                         spiceypy.convrt(lla0[1], 'DEGREES', 'RADIANS'))
+
+    enu = rotation_matrix @ dxyz
+    print(f'ENU Coordinates: {enu}')
+
+    # plot ISS as seen from cebreros
+    sp = Spice()
+    sp.load_metakernel('/Users/iortiz/spice/kernels/spooky/mk/spooky_ops.tm')
+    et_start = spiceypy.str2et('2024-05-15T17:15:24')
+    et_end = spiceypy.str2et('2024-05-15T18:15:24')
+    et = np.arange(et_start, et_end, 180)
+    pos = sp.position('-125544', et, 'ITRF93', 'DSA2')
+    altitudes = [p[2] for p in pos]
+    times = [spiceypy.et2utc(t, 'C', 0) for t in et]
+
+    import matplotlib.pyplot as plt
+    plt.figure(figsize=(10, 6))
+    plt.plot(times, altitudes, label='Altitude (km)')
+    plt.xlabel('Time (UTC)')
+    plt.ylabel('Altitude (km)')
+    plt.title(f'Altitude of ISS as seen from CEBREROS')
+    plt.xticks(rotation=45)
+    plt.legend()
+    plt.grid(True)
+    plt.tight_layout()
+    plt.show()

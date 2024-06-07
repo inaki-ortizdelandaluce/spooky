@@ -175,6 +175,9 @@ class Detector:
     def wavelength(self, value):
         self._wavelength = value
 
+    def set_wavelength(self, wavelength, wavelength_scale: Magnitude):
+        self.wavelength = Magnitude.convert(wavelength_scale, Magnitude.nano, wavelength)
+
     @property
     def repetition_rate(self):
         return self._repetition_rate
