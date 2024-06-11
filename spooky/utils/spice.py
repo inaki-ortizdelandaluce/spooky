@@ -4,6 +4,7 @@ import numpy as np
 import re
 import os.path as path
 import tempfile
+import math
 
 
 class Spice:
@@ -39,8 +40,14 @@ class Spice:
                     mk.write(content_new)
                     print('Temporary metakernel {} created'.format(mk.name))
                 Spice.load(kernel_new.name)
+                return kernel_new
             else:
                 Spice.load(kernel)
+                return kernel
+
+    @staticmethod
+    def unload_metakernel(kernel):
+        spiceypy.unload(kernel)
 
     @staticmethod
     def clear():
@@ -104,35 +111,96 @@ class Spice:
         else:
             return state[0:3], state[3:6]
 
-    def closest_approach(self, target, observer, utc_start, utc_end, multiple, step):
-        """Finds closest approaches of the target to the observer during the time period specified.
-        Params:
-            target: name of the target body
-            observer: name of the observing body
-            utc_start: start time of the applicable time period in UTC format, e.g. 2021-08-09T14:00:00
-            utc_end: end time of the applicable time period in UTC format, e.g. 2021-08-11T14:00:00
-            multiple: if true computes all closest distances at a local minima for the applicable time period,
-                if false computes the closest approach at the absolute minimum.
-            step: step size for this search in seconds. The step must be shorter than the shortest interval over which
-                the target-observer distance is increasing or decreasing.
-        Returns:
-            Array of ephemeris times for the closest approaches matching the search criteria, None if no closest
-            approach is found.
+    @staticmethod
+    def geo2enu(source, target, body='EARTH'):
         """
-        et_start = self.utc2et(utc_start)
-        et_end = self.utc2et(utc_end)
+        Transforms body-fixed geodetic coordinates to cartesian coordinates in local East-North-Up (ENU) frame
+        specifying the origin of the local ENU frame in geodetic coordinates. Default geodetic coordinates units are
+        degrees for longitude and latitude and kilometers for altitude.
+        Params:
+            source: list of list
+                A list where each element contains the geodetic coordinates of the origin of the local ENU frame,
+                for example:
+                [
+                    [lon1, lat1, alt1],
+                    [lon2, lat2, alt2],
+                    ...
+                ]
+            target: list of list
+                A list where each element contains the geodetic coordinates to be transformed to cartesian coordinates
+                in the corresponding local ENU frame, for example:
+                [
+                    [lon1, lat1, alt1],
+                    [lon2, lat2, alt2],
+                    ...
+                ]
+        Returns:
+            result: list of list
+            A list of cartesian coordinates in the specified local East-North-Up (ENU) frames
+        Example:
+            from spooky.utils.spice import Spice
+            geo0 = [[7.750, 46.017, 1673]]  # Zermatt, Switzerland
+            geo  = [[7.658, 45.976, 4531]]  # Matterhorn
+            mk = Spice.load_metakernel('/Users/iortiz/spice/kernels/spooky/mk/spooky_ops.tm')
+            enu = Spice.geo2enu(geo0, geo)
+            print(enu)  # expected [-7.1348, -4.5563, 2.8524]
+            Spice.unload_metakernel(mk)
+        """
+        s_geo = np.asarray(source)
+        t_geo = np.asarray(target)
+        if s_geo.shape != t_geo.shape:
+            raise TypeError(f"Centre {s_geo.shape} shape does not and match target shape {t_geo.shape}")
+        if s_geo.shape[1] != 3 or s_geo.ndim != 2:
+            raise TypeError(f"Input coordinates must be of shape (n,3)")
 
-        confine = stypes.SPICEDOUBLE_CELL(2)
-        spiceypy.wninsd(et_start, et_end, confine)
+        _, radii = spiceypy.bodvrd(body, 'RADII', 3)
+        re = radii[0]
+        rp = radii[2]
+        f = (re - rp) / re
 
-        ca_win = spiceypy.gfdist(target, 'NONE', observer, 'LOCMIN' if multiple else 'ABSMIN', 0.0, 0.0, step, 1000,
-                              confine)
-        win_size = spiceypy.wncard(ca_win)
+        s_rec = [spiceypy.georec(spiceypy.convrt(s_geo[n, 0], 'DEGREES', 'RADIANS'),
+                                 spiceypy.convrt(s_geo[n, 1], 'DEGREES', 'RADIANS'),
+                                 s_geo[n, 2], re, f) for n in range(s_geo.shape[0])]
+        t_rec = [spiceypy.georec(spiceypy.convrt(t_geo[n, 0], 'DEGREES', 'RADIANS'),
+                                 spiceypy.convrt(t_geo[n, 1], 'DEGREES', 'RADIANS'),
+                                 t_geo[n, 2], re, f) for n in range(t_geo.shape[0])]
 
-        if win_size == 0:
-            return None
-        else:
-            return [spiceypy.wnfetd(ca_win, i)[0] for i in range(win_size)]
+        xyz = np.array(t_rec) - np.array(s_rec)
+        if xyz.ndim == 1:
+            xyz = xyz[np.newaxis, :]
+
+        # compute body-fixed to topocentric frame rotation matrix
+        # and apply to body-fixed target in cartesian coordinates
+        rot = Spice.fixed2topo(s_geo[:, 0], s_geo[:, 1])
+        return np.einsum('ijk,ik->ij', rot, xyz)
+
+    @staticmethod
+    def fixed2topo(lon, lat):
+        """
+        Rotation matrix to convert from body-fixed to topocentric frame given the geodetic coordinates of the
+        topocentric frame's centre in degrees.
+        Params:
+            lon: float or np.ndarray
+                Longitude of the topocentric frame's centre in degrees
+            lat: float or np.ndarray
+                Latitude of the topocentric frame's centre in degrees
+        Returns:
+        result: np.ndarray
+            The rotation matrix which converts body-fixed to topocentric reference frame.
+
+        """
+        deg2rad = math.pi / 180
+
+        sin_lat = np.sin(deg2rad * np.array(lat))
+        cos_lat = np.cos(deg2rad * np.array(lat))
+        sin_lon = np.sin(deg2rad * np.array(lon))
+        cos_lon = np.cos(deg2rad * np.array(lon))
+
+        return np.transpose(np.array([
+            [-sin_lon, cos_lon, 0 * lon],
+            [-sin_lat * cos_lon, -sin_lat * sin_lon, cos_lat],
+            [cos_lat * cos_lon, cos_lat * sin_lon, sin_lat]
+        ]), (2, 0, 1))
 
 
 if __name__ == '__main__':
@@ -205,6 +273,7 @@ if __name__ == '__main__':
                            spiceypy.convrt(lla[0], 'DEGREES', 'RADIANS'),
                            lla[2] / 1000, re, f)
     dxyz = np.array(pos1) - np.array(pos0)
+    print(f"dxyz = {dxyz}")
 
     def ecef_to_enu_matrix(lat_rad, lon_rad):
         """

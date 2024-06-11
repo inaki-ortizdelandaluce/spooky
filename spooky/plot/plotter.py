@@ -105,7 +105,12 @@ def plot_detector(detector: Detector):
     plt.show()
 
 
+def plot_groundstation_los(altitude: float):
+    pass
+
+
 if __name__ == "__main__":
+    """
     wavelength = 780
     time_gate_width = 1e-9
     spectral_filter_width = 10
@@ -118,3 +123,35 @@ if __name__ == "__main__":
                  spectral_filter=spectral_filter_width,
                  preset=preset)
     plot_detector(d)
+    """
+
+    import cartopy.crs as ccrs
+    import cartopy.feature as cfeature
+
+    # Define the latitude and longitude points
+    lat = [34.05, 36.16, 40.71, 47.61]
+    lon = [-118.24, -115.15, -74.00, -122.33]
+
+    # Create a new plot with a specified projection
+    fig, ax = plt.subplots(subplot_kw={'projection': ccrs.PlateCarree()})
+    ax.set_extent([-130, -65, 25, 50], crs=ccrs.PlateCarree())  # Set the extent (lon_min, lon_max, lat_min, lat_max)
+
+    # Add geographic features
+    ax.add_feature(cfeature.COASTLINE)
+    ax.add_feature(cfeature.BORDERS)
+    ax.add_feature(cfeature.LAND)
+    ax.add_feature(cfeature.LAKES, alpha=0.5)
+    ax.add_feature(cfeature.RIVERS)
+
+    # Plot the data
+    ax.plot(lon, lat, '-o', transform=ccrs.PlateCarree(), label='Path')
+
+    # Add gridlines and labels
+    ax.gridlines(draw_labels=True)
+
+    # Add a title and legend
+    plt.title('Geoplot Example')
+    plt.legend()
+
+    # Show the plot
+    plt.show()

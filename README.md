@@ -21,10 +21,20 @@ protocol capabilities, and environmental impacts, this tool will enable end-user
 to comprehensively evaluate the viability of their business cases, thus paving the way for informed decision-making 
 and strategic planning in the rapidly evolving field of quantum cryptography and communication.
 
-## Poetry set-up
+## Poetry quick guide (see https://python-poetry.org/docs/cli/)
 ````
+poetry new --src --name my.package my-package
+poetry init
+poetry install
+poetry update
+poetry add package
+poetry add package@^X.Y.Z
+poetry add "package>=X.Y.Z"
+poetry add package@latest
+poetry remove package
+poetry shell
+poetry show --tree
 ````
-
 
 ## Qrackling set-up
 ````
