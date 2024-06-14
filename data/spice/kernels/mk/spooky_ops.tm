@@ -48,7 +48,7 @@ Implementation Notes
                            '$KERNELS/fk/earthfixeditrf93.tf'
                            '$KERNELS/fk/earthstns_jaxa_20230905.tf'
                            '$KERNELS/fk/estrack_v04.tf'
-                           '$KERNELS/fk/spooky_gs_v00.tf'
+                           '$KERNELS/fk/spooky_gs_v01.tf'
 
                            '$KERNELS/lsk/naif0012.tls'
 
@@ -64,7 +64,7 @@ Implementation Notes
                            '$KERNELS/spk/estrack_v04.bsp'
 
                            '$KERNELS/spk/ISS.bsp'
-                           '$KERNELS/spk/spooky_gs_v00.bsp'
+                           '$KERNELS/spk/spooky_gs_v01.bsp'
                            '$KERNELS/spk/matlab.bsp'
 
                          )

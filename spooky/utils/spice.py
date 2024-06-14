@@ -139,11 +139,11 @@ class Spice:
             A list of cartesian coordinates in the specified local East-North-Up (ENU) frames
         Example:
             from spooky.utils.spice import Spice
-            geo0 = [[7.750, 46.017, 1673]]  # Zermatt, Switzerland
-            geo  = [[7.658, 45.976, 4531]]  # Matterhorn
+            geo0 = [[-3.319995, 55.909723, 0.010]]  # Heriot-Watt Optical Ground Station
+            geo  = [[-5.0362, 56.6657, 0.931]]  # Glen Coe, Three Sisters Beinn Fhada
             mk = Spice.load_metakernel('/Users/iortiz/spice/kernels/spooky/mk/spooky_ops.tm')
             enu = Spice.geo2enu(geo0, geo)
-            print(enu)  # expected [-7.1348, -4.5563, 2.8524]
+            print(enu)  # expected [-105.2305, 85.4909, -0.5178]
             Spice.unload_metakernel(mk)
         """
         s_geo = np.asarray(source)

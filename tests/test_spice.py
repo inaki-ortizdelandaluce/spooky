@@ -26,15 +26,22 @@ class TestSpice(unittest.TestCase):
         result = Spice.geo2enu(source, target)
         np.testing.assert_almost_equal(result, expected_output, decimal=4)
 
-        source = [[-3.1572, 55.9398, 0.251]]  # Edinburgh, Arthur's Seat
+        source = [[-3.1572, 55.9398, 0.251]]  # Arthur's Seat, Edinburgh
         target = [[-5.0362, 56.6657, 0.931]]  # Glen Coe, Three Sisters Beinn Fhada
         expected_output = np.array([[-115.2090, 82.4018, -0.8902]])
 
         result = Spice.geo2enu(source, target)
         np.testing.assert_almost_equal(result, expected_output, decimal=3)
 
+        source = [[-3.319995, 55.909723, 0.010]]  # HOGS, Heriot-Watt University, Edinburgh
+        target = [[-5.0362, 56.6657, 0.931]]  # Glen Coe, Three Sisters Beinn Fhada
+        expected_output = np.array([[-105.2305, 85.4909, -0.5178]])
+
+        result = Spice.geo2enu(source, target)
+        np.testing.assert_almost_equal(result, expected_output, decimal=3)
+
         source = [[7.750, 46.017, 1.673],     # Zermatt, Switzerland
-                  [-3.1572, 55.9398, 0.251]]  # Edinburgh, Arthur's Seat
+                  [-3.1572, 55.9398, 0.251]]  # Arthur's Seat, Edinburgh
         target = [[7.658, 45.976, 4.531],     # Matterhorn
                   [-5.0362, 56.6657, 0.931]]  # Glen Coe, Three Sisters Beinn Fhada
         expected_output = np.array([[-7.1348, -4.5563, 2.8524],

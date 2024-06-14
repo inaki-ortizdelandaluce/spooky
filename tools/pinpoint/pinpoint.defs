@@ -1,0 +1,136 @@
+\begindata
+
+   SITES = ( 'HOGS', 
+             'GRAZ', 
+             'XINGLONG', 
+             'NANSHAN', 
+             'DELINGHA', 
+             'LIJIANG', 
+             'NGARI', 
+             'SHANGAI', 
+             'BEIJING', 
+             'JINAN', 
+             'WEIHAI', 
+             'MOHE')
+
+   HOGS_FRAME        = 'ITRF93'
+   HOGS_IDCODE       = -399001
+   HOGS_LATLON       = ( 55.909723, -3.319995, 0.010 )
+   HOGS_CENTER       = 399
+   HOGS_BOUNDS       = ( @2020-01-01, @2100-01-01 )
+   HOGS_UP           = 'Z'
+   HOGS_NORTH        = 'X'
+   HOGS_TOPO_FRAME   = 'HOGS_TOPO'
+   HOGS_TOPO_ID      = -1399001
+
+   GRAZ_FRAME        = 'ITRF93'
+   GRAZ_IDCODE       = -399002
+   GRAZ_LATLON       = ( 47.0675, 15.492777, 0.483 )
+   GRAZ_CENTER       = 399
+   GRAZ_BOUNDS       = ( @2020-01-01, @2100-01-01 )
+   GRAZ_UP           = 'Z'
+   GRAZ_NORTH        = 'X'
+   GRAZ_TOPO_FRAME   = 'GRAZ_TOPO'
+   GRAZ_TOPO_ID      = -1399002
+
+   XINGLONG_FRAME        = 'ITRF93'
+   XINGLONG_IDCODE       = -399003
+   XINGLONG_LATLON       = ( 40.395866, 117.910792, 0.890 )
+   XINGLONG_CENTER       = 399
+   XINGLONG_BOUNDS       = ( @2020-01-01, @2100-01-01 )
+   XINGLONG_UP           = 'Z'
+   XINGLONG_NORTH        = 'X'
+   XINGLONG_TOPO_FRAME   = 'XINGLONG_TOPO'
+   XINGLONG_TOPO_ID      = -1399003
+
+   NANSHAN_FRAME        = 'ITRF93'
+   NANSHAN_IDCODE       = -399004
+   NANSHAN_LATLON       = ( 43.475461, 87.176686, 2.028 )
+   NANSHAN_CENTER       = 399
+   NANSHAN_BOUNDS       = ( @2020-01-01, @2100-01-01 )
+   NANSHAN_UP           = 'Z'
+   NANSHAN_NORTH        = 'X'
+   NANSHAN_TOPO_FRAME   = 'NANSHAN_TOPO'
+   NANSHAN_TOPO_ID      = -1399004
+
+   DELINGHA_FRAME        = 'ITRF93'
+   DELINGHA_IDCODE       = -399005
+   DELINGHA_LATLON       = ( 37.379008, 97.726948, 3.153 )
+   DELINGHA_CENTER       = 399
+   DELINGHA_BOUNDS       = ( @2020-01-01, @2100-01-01 )
+   DELINGHA_UP           = 'Z'
+   DELINGHA_NORTH        = 'X'
+   DELINGHA_TOPO_FRAME   = 'DELINGHA_TOPO'
+   DELINGHA_TOPO_ID      = -1399005
+
+   LIJIANG_FRAME        = 'ITRF93'
+   LIJIANG_IDCODE       = -399006
+   LIJIANG_LATLON       = ( 26.6939, 100.0293, 3.233 )
+   LIJIANG_CENTER       = 399
+   LIJIANG_BOUNDS       = ( @2020-01-01, @2100-01-01 )
+   LIJIANG_UP           = 'Z'
+   LIJIANG_NORTH        = 'X'
+   LIJIANG_TOPO_FRAME   = 'LIJIANG_TOPO'
+   LIJIANG_TOPO_ID      = -1399006
+
+   NGARI_FRAME        = 'ITRF93'
+   NGARI_IDCODE       = -399007
+   NGARI_LATLON       = ( 32.325019, 80.026161, 5.047 )
+   NGARI_CENTER       = 399
+   NGARI_BOUNDS       = ( @2020-01-01, @2100-01-01 )
+   NGARI_UP           = 'Z'
+   NGARI_NORTH        = 'X'
+   NGARI_TOPO_FRAME   = 'NGARI_TOPO'
+   NGARI_TOPO_ID      = -1399007
+
+   SHANGAI_FRAME        = 'ITRF93'
+   SHANGAI_IDCODE       = -399008
+   SHANGAI_LATLON       = ( 31.1263, 121.5424, 0.025 )
+   SHANGAI_CENTER       = 399
+   SHANGAI_BOUNDS       = ( @2020-01-01, @2100-01-01 )
+   SHANGAI_UP           = 'Z'
+   SHANGAI_NORTH        = 'X'
+   SHANGAI_TOPO_FRAME   = 'SHANGAI_TOPO'
+   SHANGAI_TOPO_ID      = -1399008
+
+   BEIJING_FRAME        = 'ITRF93'
+   BEIJING_IDCODE       = -399009
+   BEIJING_LATLON       = ( 39.8853, 116.3514, 0.120 )
+   BEIJING_CENTER       = 399
+   BEIJING_BOUNDS       = ( @2020-01-01, @2100-01-01 )
+   BEIJING_UP           = 'Z'
+   BEIJING_NORTH        = 'X'
+   BEIJING_TOPO_FRAME   = 'BEIJING_TOPO'
+   BEIJING_TOPO_ID      = -1399009
+
+   JINAN_FRAME        = 'ITRF93'
+   JINAN_IDCODE       = -399010
+   JINAN_LATLON       = ( 36.6768, 117.1235, 0.085 )
+   JINAN_CENTER       = 399
+   JINAN_BOUNDS       = ( @2020-01-01, @2100-01-01 )
+   JINAN_UP           = 'Z'
+   JINAN_NORTH        = 'X'
+   JINAN_TOPO_FRAME   = 'JINAN_TOPO'
+   JINAN_TOPO_ID      = -1399010
+
+   WEIHAI_FRAME        = 'ITRF93'
+   WEIHAI_IDCODE       = -399011
+   WEIHAI_LATLON       = ( 37.5340, 122.0513, 0.046 )
+   WEIHAI_CENTER       = 399
+   WEIHAI_BOUNDS       = ( @2020-01-01, @2100-01-01 )
+   WEIHAI_UP           = 'Z'
+   WEIHAI_NORTH        = 'X'
+   WEIHAI_TOPO_FRAME   = 'WEIHAI_TOPO'
+   WEIHAI_TOPO_ID      = -1399011
+
+   MOHE_FRAME        = 'ITRF93'
+   MOHE_IDCODE       = -399012
+   MOHE_LATLON       = ( 53.4852, 122.3537, 0.300 )
+   MOHE_CENTER       = 399
+   MOHE_BOUNDS       = ( @2020-01-01, @2100-01-01 )
+   MOHE_UP           = 'Z'
+   MOHE_NORTH        = 'X'
+   MOHE_TOPO_FRAME   = 'MOHE_TOPO'
+   MOHE_TOPO_ID      = -1399012
+
+\begintext
