@@ -5,8 +5,8 @@ KPL/FK
    This file was created by PINPOINT.
  
    PINPOINT Version 3.3.0 --- December 13, 2021
-   PINPOINT RUN DATE/TIME:    2024-06-12T11:04:54
-   PINPOINT DEFINITIONS FILE: /tmp/pinpoint_v01.defs
+   PINPOINT RUN DATE/TIME:    2024-06-14T09:18:58
+   PINPOINT DEFINITIONS FILE: /tmp/pinpoint.defs
    PINPOINT PCK FILE:         /tmp/pck00011.tpc
    PINPOINT SPK FILE:         /tmp/spooky_gs_v01.bsp
  
@@ -63,7 +63,7 @@ KPL/FK
    Topocentric frame HOGS_TOPO
  
       The Z axis of this frame points toward the zenith.
-      The X axis of this frame points North.
+      The Y axis of this frame points North.
  
       Topocentric frame HOGS_TOPO is centered at the
       site HOGS, which has Cartesian coordinates
@@ -103,7 +103,7 @@ KPL/FK
    TKFRAME_-1399001_AXES               =  ( 3, 2, 3 )
    TKFRAME_-1399001_ANGLES             =  ( -356.6800050000000,
                                              -34.0902770000000,
-                                             180.0000000000000 )
+                                             270.0000000000000 )
  
  
 \begintext
@@ -111,7 +111,7 @@ KPL/FK
    Topocentric frame GRAZ_TOPO
  
       The Z axis of this frame points toward the zenith.
-      The X axis of this frame points North.
+      The Y axis of this frame points North.
  
       Topocentric frame GRAZ_TOPO is centered at the
       site GRAZ, which has Cartesian coordinates
@@ -151,7 +151,7 @@ KPL/FK
    TKFRAME_-1399002_AXES               =  ( 3, 2, 3 )
    TKFRAME_-1399002_ANGLES             =  (  -15.4927770000000,
                                              -42.9325000000000,
-                                             180.0000000000000 )
+                                             270.0000000000000 )
  
  
 \begintext
@@ -159,7 +159,7 @@ KPL/FK
    Topocentric frame XINGLONG_TOPO
  
       The Z axis of this frame points toward the zenith.
-      The X axis of this frame points North.
+      The Y axis of this frame points North.
  
       Topocentric frame XINGLONG_TOPO is centered at the
       site XINGLONG, which has Cartesian coordinates
@@ -199,7 +199,7 @@ KPL/FK
    TKFRAME_-1399003_AXES               =  ( 3, 2, 3 )
    TKFRAME_-1399003_ANGLES             =  ( -117.9107920000000,
                                              -49.6041340000000,
-                                             180.0000000000000 )
+                                             270.0000000000000 )
  
  
 \begintext
@@ -207,7 +207,7 @@ KPL/FK
    Topocentric frame NANSHAN_TOPO
  
       The Z axis of this frame points toward the zenith.
-      The X axis of this frame points North.
+      The Y axis of this frame points North.
  
       Topocentric frame NANSHAN_TOPO is centered at the
       site NANSHAN, which has Cartesian coordinates
@@ -247,7 +247,7 @@ KPL/FK
    TKFRAME_-1399004_AXES               =  ( 3, 2, 3 )
    TKFRAME_-1399004_ANGLES             =  (  -87.1766860000000,
                                              -46.5245390000000,
-                                             180.0000000000000 )
+                                             270.0000000000000 )
  
  
 \begintext
@@ -255,7 +255,7 @@ KPL/FK
    Topocentric frame DELINGHA_TOPO
  
       The Z axis of this frame points toward the zenith.
-      The X axis of this frame points North.
+      The Y axis of this frame points North.
  
       Topocentric frame DELINGHA_TOPO is centered at the
       site DELINGHA, which has Cartesian coordinates
@@ -295,7 +295,7 @@ KPL/FK
    TKFRAME_-1399005_AXES               =  ( 3, 2, 3 )
    TKFRAME_-1399005_ANGLES             =  (  -97.7269480000000,
                                              -52.6209920000000,
-                                             180.0000000000000 )
+                                             270.0000000000000 )
  
  
 \begintext
@@ -303,7 +303,7 @@ KPL/FK
    Topocentric frame LIJIANG_TOPO
  
       The Z axis of this frame points toward the zenith.
-      The X axis of this frame points North.
+      The Y axis of this frame points North.
  
       Topocentric frame LIJIANG_TOPO is centered at the
       site LIJIANG, which has Cartesian coordinates
@@ -343,7 +343,7 @@ KPL/FK
    TKFRAME_-1399006_AXES               =  ( 3, 2, 3 )
    TKFRAME_-1399006_ANGLES             =  ( -100.0293000000000,
                                              -63.3061000000000,
-                                             180.0000000000000 )
+                                             270.0000000000000 )
  
  
 \begintext
@@ -351,7 +351,7 @@ KPL/FK
    Topocentric frame NGARI_TOPO
  
       The Z axis of this frame points toward the zenith.
-      The X axis of this frame points North.
+      The Y axis of this frame points North.
  
       Topocentric frame NGARI_TOPO is centered at the
       site NGARI, which has Cartesian coordinates
@@ -391,7 +391,7 @@ KPL/FK
    TKFRAME_-1399007_AXES               =  ( 3, 2, 3 )
    TKFRAME_-1399007_ANGLES             =  (  -80.0261610000000,
                                              -57.6749810000000,
-                                             180.0000000000000 )
+                                             270.0000000000000 )
  
  
 \begintext
@@ -399,7 +399,7 @@ KPL/FK
    Topocentric frame SHANGAI_TOPO
  
       The Z axis of this frame points toward the zenith.
-      The X axis of this frame points North.
+      The Y axis of this frame points North.
  
       Topocentric frame SHANGAI_TOPO is centered at the
       site SHANGAI, which has Cartesian coordinates
@@ -439,7 +439,7 @@ KPL/FK
    TKFRAME_-1399008_AXES               =  ( 3, 2, 3 )
    TKFRAME_-1399008_ANGLES             =  ( -121.5424000000000,
                                              -58.8737000000000,
-                                             180.0000000000000 )
+                                             270.0000000000000 )
  
  
 \begintext
@@ -447,7 +447,7 @@ KPL/FK
    Topocentric frame BEIJING_TOPO
  
       The Z axis of this frame points toward the zenith.
-      The X axis of this frame points North.
+      The Y axis of this frame points North.
  
       Topocentric frame BEIJING_TOPO is centered at the
       site BEIJING, which has Cartesian coordinates
@@ -487,7 +487,7 @@ KPL/FK
    TKFRAME_-1399009_AXES               =  ( 3, 2, 3 )
    TKFRAME_-1399009_ANGLES             =  ( -116.3514000000000,
                                              -50.1147000000000,
-                                             180.0000000000000 )
+                                             270.0000000000000 )
  
  
 \begintext
@@ -495,7 +495,7 @@ KPL/FK
    Topocentric frame JINAN_TOPO
  
       The Z axis of this frame points toward the zenith.
-      The X axis of this frame points North.
+      The Y axis of this frame points North.
  
       Topocentric frame JINAN_TOPO is centered at the
       site JINAN, which has Cartesian coordinates
@@ -535,7 +535,7 @@ KPL/FK
    TKFRAME_-1399010_AXES               =  ( 3, 2, 3 )
    TKFRAME_-1399010_ANGLES             =  ( -117.1235000000000,
                                              -53.3232000000000,
-                                             180.0000000000000 )
+                                             270.0000000000000 )
  
  
 \begintext
@@ -543,7 +543,7 @@ KPL/FK
    Topocentric frame WEIHAI_TOPO
  
       The Z axis of this frame points toward the zenith.
-      The X axis of this frame points North.
+      The Y axis of this frame points North.
  
       Topocentric frame WEIHAI_TOPO is centered at the
       site WEIHAI, which has Cartesian coordinates
@@ -583,7 +583,7 @@ KPL/FK
    TKFRAME_-1399011_AXES               =  ( 3, 2, 3 )
    TKFRAME_-1399011_ANGLES             =  ( -122.0513000000000,
                                              -52.4660000000000,
-                                             180.0000000000000 )
+                                             270.0000000000000 )
  
  
 \begintext
@@ -591,7 +591,7 @@ KPL/FK
    Topocentric frame MOHE_TOPO
  
       The Z axis of this frame points toward the zenith.
-      The X axis of this frame points North.
+      The Y axis of this frame points North.
  
       Topocentric frame MOHE_TOPO is centered at the
       site MOHE, which has Cartesian coordinates
@@ -631,12 +631,12 @@ KPL/FK
    TKFRAME_-1399012_AXES               =  ( 3, 2, 3 )
    TKFRAME_-1399012_ANGLES             =  ( -122.3537000000000,
                                              -36.5148000000000,
-                                             180.0000000000000 )
+                                             270.0000000000000 )
  
 \begintext
  
  
-Definitions file /tmp/pinpoint_v01.defs
+Definitions file /tmp/pinpoint.defs
 --------------------------------------------------------------------------------
  
 begindata
@@ -660,7 +660,7 @@ begindata
    HOGS_CENTER       = 399
    HOGS_BOUNDS       = ( @2020-01-01, @2100-01-01 )
    HOGS_UP           = 'Z'
-   HOGS_NORTH        = 'X'
+   HOGS_NORTH        = 'Y'
    HOGS_TOPO_FRAME   = 'HOGS_TOPO'
    HOGS_TOPO_ID      = -1399001
  
@@ -670,7 +670,7 @@ begindata
    GRAZ_CENTER       = 399
    GRAZ_BOUNDS       = ( @2020-01-01, @2100-01-01 )
    GRAZ_UP           = 'Z'
-   GRAZ_NORTH        = 'X'
+   GRAZ_NORTH        = 'Y'
    GRAZ_TOPO_FRAME   = 'GRAZ_TOPO'
    GRAZ_TOPO_ID      = -1399002
  
@@ -680,7 +680,7 @@ begindata
    XINGLONG_CENTER       = 399
    XINGLONG_BOUNDS       = ( @2020-01-01, @2100-01-01 )
    XINGLONG_UP           = 'Z'
-   XINGLONG_NORTH        = 'X'
+   XINGLONG_NORTH        = 'Y'
    XINGLONG_TOPO_FRAME   = 'XINGLONG_TOPO'
    XINGLONG_TOPO_ID      = -1399003
  
@@ -690,7 +690,7 @@ begindata
    NANSHAN_CENTER       = 399
    NANSHAN_BOUNDS       = ( @2020-01-01, @2100-01-01 )
    NANSHAN_UP           = 'Z'
-   NANSHAN_NORTH        = 'X'
+   NANSHAN_NORTH        = 'Y'
    NANSHAN_TOPO_FRAME   = 'NANSHAN_TOPO'
    NANSHAN_TOPO_ID      = -1399004
  
@@ -700,7 +700,7 @@ begindata
    DELINGHA_CENTER       = 399
    DELINGHA_BOUNDS       = ( @2020-01-01, @2100-01-01 )
    DELINGHA_UP           = 'Z'
-   DELINGHA_NORTH        = 'X'
+   DELINGHA_NORTH        = 'Y'
    DELINGHA_TOPO_FRAME   = 'DELINGHA_TOPO'
    DELINGHA_TOPO_ID      = -1399005
  
@@ -710,7 +710,7 @@ begindata
    LIJIANG_CENTER       = 399
    LIJIANG_BOUNDS       = ( @2020-01-01, @2100-01-01 )
    LIJIANG_UP           = 'Z'
-   LIJIANG_NORTH        = 'X'
+   LIJIANG_NORTH        = 'Y'
    LIJIANG_TOPO_FRAME   = 'LIJIANG_TOPO'
    LIJIANG_TOPO_ID      = -1399006
  
@@ -720,7 +720,7 @@ begindata
    NGARI_CENTER       = 399
    NGARI_BOUNDS       = ( @2020-01-01, @2100-01-01 )
    NGARI_UP           = 'Z'
-   NGARI_NORTH        = 'X'
+   NGARI_NORTH        = 'Y'
    NGARI_TOPO_FRAME   = 'NGARI_TOPO'
    NGARI_TOPO_ID      = -1399007
  
@@ -730,7 +730,7 @@ begindata
    SHANGAI_CENTER       = 399
    SHANGAI_BOUNDS       = ( @2020-01-01, @2100-01-01 )
    SHANGAI_UP           = 'Z'
-   SHANGAI_NORTH        = 'X'
+   SHANGAI_NORTH        = 'Y'
    SHANGAI_TOPO_FRAME   = 'SHANGAI_TOPO'
    SHANGAI_TOPO_ID      = -1399008
  
@@ -740,7 +740,7 @@ begindata
    BEIJING_CENTER       = 399
    BEIJING_BOUNDS       = ( @2020-01-01, @2100-01-01 )
    BEIJING_UP           = 'Z'
-   BEIJING_NORTH        = 'X'
+   BEIJING_NORTH        = 'Y'
    BEIJING_TOPO_FRAME   = 'BEIJING_TOPO'
    BEIJING_TOPO_ID      = -1399009
  
@@ -750,7 +750,7 @@ begindata
    JINAN_CENTER       = 399
    JINAN_BOUNDS       = ( @2020-01-01, @2100-01-01 )
    JINAN_UP           = 'Z'
-   JINAN_NORTH        = 'X'
+   JINAN_NORTH        = 'Y'
    JINAN_TOPO_FRAME   = 'JINAN_TOPO'
    JINAN_TOPO_ID      = -1399010
  
@@ -760,7 +760,7 @@ begindata
    WEIHAI_CENTER       = 399
    WEIHAI_BOUNDS       = ( @2020-01-01, @2100-01-01 )
    WEIHAI_UP           = 'Z'
-   WEIHAI_NORTH        = 'X'
+   WEIHAI_NORTH        = 'Y'
    WEIHAI_TOPO_FRAME   = 'WEIHAI_TOPO'
    WEIHAI_TOPO_ID      = -1399011
  
@@ -770,7 +770,7 @@ begindata
    MOHE_CENTER       = 399
    MOHE_BOUNDS       = ( @2020-01-01, @2100-01-01 )
    MOHE_UP           = 'Z'
-   MOHE_NORTH        = 'X'
+   MOHE_NORTH        = 'Y'
    MOHE_TOPO_FRAME   = 'MOHE_TOPO'
    MOHE_TOPO_ID      = -1399012
  

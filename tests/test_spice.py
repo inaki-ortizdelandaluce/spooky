@@ -70,6 +70,15 @@ class TestSpice(unittest.TestCase):
         with self.assertRaises(TypeError):
             Spice.geo2enu(valid_source, invalid_target)
 
+    def test_lla2enu_correctness(self):
+        frame = 'HOGS'
+        lla = [-5.0362, 56.6657, 0.931]  # Glen Coe, Three Sisters Beinn Fhada
+        expected_enu = [-105.2305, 85.4909, -0.5178]
+
+        result = Spice.lla2enu(frame, lla)
+
+        self.assertTrue(np.allclose(result, expected_enu, atol=1e-4))
+
 
 if __name__ == '__main__':
     unittest.main()

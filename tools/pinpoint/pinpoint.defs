@@ -19,7 +19,7 @@
    HOGS_CENTER       = 399
    HOGS_BOUNDS       = ( @2020-01-01, @2100-01-01 )
    HOGS_UP           = 'Z'
-   HOGS_NORTH        = 'X'
+   HOGS_NORTH        = 'Y'
    HOGS_TOPO_FRAME   = 'HOGS_TOPO'
    HOGS_TOPO_ID      = -1399001
 
@@ -29,7 +29,7 @@
    GRAZ_CENTER       = 399
    GRAZ_BOUNDS       = ( @2020-01-01, @2100-01-01 )
    GRAZ_UP           = 'Z'
-   GRAZ_NORTH        = 'X'
+   GRAZ_NORTH        = 'Y'
    GRAZ_TOPO_FRAME   = 'GRAZ_TOPO'
    GRAZ_TOPO_ID      = -1399002
 
@@ -39,7 +39,7 @@
    XINGLONG_CENTER       = 399
    XINGLONG_BOUNDS       = ( @2020-01-01, @2100-01-01 )
    XINGLONG_UP           = 'Z'
-   XINGLONG_NORTH        = 'X'
+   XINGLONG_NORTH        = 'Y'
    XINGLONG_TOPO_FRAME   = 'XINGLONG_TOPO'
    XINGLONG_TOPO_ID      = -1399003
 
@@ -49,7 +49,7 @@
    NANSHAN_CENTER       = 399
    NANSHAN_BOUNDS       = ( @2020-01-01, @2100-01-01 )
    NANSHAN_UP           = 'Z'
-   NANSHAN_NORTH        = 'X'
+   NANSHAN_NORTH        = 'Y'
    NANSHAN_TOPO_FRAME   = 'NANSHAN_TOPO'
    NANSHAN_TOPO_ID      = -1399004
 
@@ -59,7 +59,7 @@
    DELINGHA_CENTER       = 399
    DELINGHA_BOUNDS       = ( @2020-01-01, @2100-01-01 )
    DELINGHA_UP           = 'Z'
-   DELINGHA_NORTH        = 'X'
+   DELINGHA_NORTH        = 'Y'
    DELINGHA_TOPO_FRAME   = 'DELINGHA_TOPO'
    DELINGHA_TOPO_ID      = -1399005
 
@@ -69,7 +69,7 @@
    LIJIANG_CENTER       = 399
    LIJIANG_BOUNDS       = ( @2020-01-01, @2100-01-01 )
    LIJIANG_UP           = 'Z'
-   LIJIANG_NORTH        = 'X'
+   LIJIANG_NORTH        = 'Y'
    LIJIANG_TOPO_FRAME   = 'LIJIANG_TOPO'
    LIJIANG_TOPO_ID      = -1399006
 
@@ -79,7 +79,7 @@
    NGARI_CENTER       = 399
    NGARI_BOUNDS       = ( @2020-01-01, @2100-01-01 )
    NGARI_UP           = 'Z'
-   NGARI_NORTH        = 'X'
+   NGARI_NORTH        = 'Y'
    NGARI_TOPO_FRAME   = 'NGARI_TOPO'
    NGARI_TOPO_ID      = -1399007
 
@@ -89,7 +89,7 @@
    SHANGAI_CENTER       = 399
    SHANGAI_BOUNDS       = ( @2020-01-01, @2100-01-01 )
    SHANGAI_UP           = 'Z'
-   SHANGAI_NORTH        = 'X'
+   SHANGAI_NORTH        = 'Y'
    SHANGAI_TOPO_FRAME   = 'SHANGAI_TOPO'
    SHANGAI_TOPO_ID      = -1399008
 
@@ -99,7 +99,7 @@
    BEIJING_CENTER       = 399
    BEIJING_BOUNDS       = ( @2020-01-01, @2100-01-01 )
    BEIJING_UP           = 'Z'
-   BEIJING_NORTH        = 'X'
+   BEIJING_NORTH        = 'Y'
    BEIJING_TOPO_FRAME   = 'BEIJING_TOPO'
    BEIJING_TOPO_ID      = -1399009
 
@@ -109,7 +109,7 @@
    JINAN_CENTER       = 399
    JINAN_BOUNDS       = ( @2020-01-01, @2100-01-01 )
    JINAN_UP           = 'Z'
-   JINAN_NORTH        = 'X'
+   JINAN_NORTH        = 'Y'
    JINAN_TOPO_FRAME   = 'JINAN_TOPO'
    JINAN_TOPO_ID      = -1399010
 
@@ -119,7 +119,7 @@
    WEIHAI_CENTER       = 399
    WEIHAI_BOUNDS       = ( @2020-01-01, @2100-01-01 )
    WEIHAI_UP           = 'Z'
-   WEIHAI_NORTH        = 'X'
+   WEIHAI_NORTH        = 'Y'
    WEIHAI_TOPO_FRAME   = 'WEIHAI_TOPO'
    WEIHAI_TOPO_ID      = -1399011
 
@@ -129,7 +129,7 @@
    MOHE_CENTER       = 399
    MOHE_BOUNDS       = ( @2020-01-01, @2100-01-01 )
    MOHE_UP           = 'Z'
-   MOHE_NORTH        = 'X'
+   MOHE_NORTH        = 'Y'
    MOHE_TOPO_FRAME   = 'MOHE_TOPO'
    MOHE_TOPO_ID      = -1399012
 

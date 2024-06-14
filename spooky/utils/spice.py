@@ -112,6 +112,46 @@ class Spice:
             return state[0:3], state[3:6]
 
     @staticmethod
+    def lla2enu(frame, lla):
+        """
+        Transforms body-fixed geodetic coordinates to cartesian coordinates in a local East-North-Up (ENU) frame.
+        Params:
+            frame: str
+                The local East-North-Up (ENU) frame, e.g. 'HOGS'. This reference frame should be available in the
+                spice kernel dataset loaded.
+            lla: list
+                The geodetic coordinates (longitude, latitude and altitude) to be transformed to cartesian coordinates
+                in the corresponding local ENU frame. Default geodetic coordinates units are degrees for longitude and
+                latitude and kilometers for altitude.
+        Returns:
+            result: list
+            The cartesian coordinates in the specified local East-North-Up (ENU) frame
+        Example:
+            from spooky.utils.spice import Spice
+            lla  = [-5.0362, 56.6657, 0.931]  # Glen Coe, Three Sisters Beinn Fhada
+            mk = Spice.load_metakernel('/Users/iortiz/spice/kernels/spooky/mk/spooky_ops.tm')
+            enu = Spice.lla2enu('HOGS', lla)
+            print(enu)  # expected [-105.2305, 85.4909, -0.5178]
+            Spice.unload_metakernel(mk)
+        """
+        _, radii = spiceypy.bodvrd('EARTH', 'RADII', 3)
+        re = radii[0]
+        rp = radii[2]
+        f = (re - rp) / re
+
+        et = spiceypy.str2et('2024-11-30')
+
+        frame_state, _ = spiceypy.spkezr(frame, et, 'ITRF93', 'NONE', 'EARTH')[:3]
+        frame_center = frame_state[:3]
+        rec = spiceypy.georec(spiceypy.convrt(lla[0], 'DEGREES', 'RADIANS'),
+                              spiceypy.convrt(lla[1], 'DEGREES', 'RADIANS'),
+                              lla[2], re, f)
+        r = rec - frame_center
+
+        xform = spiceypy.pxform('ITRF93', frame + '_TOPO',  et)
+        return spiceypy.mxv(xform, r)
+
+    @staticmethod
     def geo2enu(source, target, body='EARTH'):
         """
         Transforms body-fixed geodetic coordinates to cartesian coordinates in local East-North-Up (ENU) frame

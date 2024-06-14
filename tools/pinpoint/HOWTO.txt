@@ -3,7 +3,7 @@ docker run -it spice
 
 docker run -v $(pwd):/tmp spice:latest pinpoint \
  -def /tmp/pinpoint.defs \
- -spk /tmp/spooky_gs_v00.bsp \
+ -spk /tmp/spooky_gs_v01.bsp \
  -pck /tmp/pck00011.tpc \
- -fk /tmp/spooky_gs_v00.tf \
+ -fk /tmp/spooky_gs_v01.tf \
  -batch

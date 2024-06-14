@@ -35,7 +35,7 @@ def write_pinpoint_def(path):
                 contents += just(f"{site}_CENTER       = 399") + '\n'
                 contents += just(f"{site}_BOUNDS       = ( @2020-01-01, @2100-01-01 )") + '\n'
                 contents += just(f"{site}_UP           = 'Z'") + '\n'
-                contents += just(f"{site}_NORTH        = 'X'") + '\n'
+                contents += just(f"{site}_NORTH        = 'Y'") + '\n'
                 contents += just(f"{site}_TOPO_FRAME   = '{site}_TOPO'") + '\n'
                 contents += just(f"{site}_TOPO_ID      = -1{site_id}") + '\n\n'
 
