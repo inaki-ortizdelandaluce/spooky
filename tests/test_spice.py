@@ -2,6 +2,8 @@ import unittest
 import spooky.spice as spice
 import numpy as np
 import os
+import tempfile
+import math
 
 
 class TestSpice(unittest.TestCase):
@@ -77,6 +79,59 @@ class TestSpice(unittest.TestCase):
         result = spice.lla2enu(frame, lla)
 
         self.assertTrue(np.allclose(result, expected_enu, atol=1e-4))
+
+    def test_write_spk09(self):
+        # compute states for unequal time steps
+        spice.load(['mar097.bsp'])
+        et = spice.str2et("2018 Apr 03 08:35")
+        time = et
+        step = 60
+        delta = 10.0
+        steps = 800
+
+        epochs = np.zeros(steps)
+        states = np.zeros(shape=(steps, 6))
+        for i in range(steps):
+            pos, vel = spice.state("PHOBOS", time, "J2000", "MARS")
+            states[i] = np.concatenate((pos, vel), axis=0)
+            epochs[i] = time + 3600.0  # object follows phobos 1 hour later
+            time = time + step + math.sin(0.5 * math.pi * i / 2.0) * delta
+        spk_file = "spkw09_ex1.bsp"
+        spice.write_spk09(spk_file, epochs, states, 403, "MARS", "J2000", 3)
+
+        # load spk and validate interpolated state after 13 hours
+        et = et + 46800.0
+        spice.load([spk_file])
+        pos, vel = spice.state("403", et, "J2000", "MARS")
+        state = np.concatenate((pos, vel), axis=0)
+        expected_output = np.array([-7327.26277, 2414.32655, 5207.10638, -0.94289, -1.89473, -0.39671])
+
+        # remove spk
+        os.remove(spk_file)
+
+        np.testing.assert_almost_equal(state, expected_output, decimal=5)
+
+    def test_llat2spk(self):
+        dir_path = os.path.dirname(os.path.realpath(__file__))
+        llat_file = os.path.join(dir_path, '100kmSSOrbitLLAT.txt')
+
+        spk_file = "spkw09_100kmSSOrbit.bsp"
+        et0 = spice.str2et('2023-01-01T00:00:00')
+        obj_id = -10000
+        spice.llat2spk(obj_id, llat_file, spk_file, et0=et0)
+
+        self.assertTrue(os.path.exists(spk_file))
+
+        # load spk and validate initial state
+        spice.load([spk_file])
+        pos, vel = spice.state(str(obj_id), et0, 'ITRF93', 'EARTH')
+        state = np.concatenate((pos, vel), axis=0)
+        expected_output = np.concatenate((spice.geo2rec(75.77053312558824, 81.56912619027396, 0.1207842661159448),
+                                          [0.0, 0.0, 0.0]), axis=0)
+
+        os.remove(spk_file)
+
+        np.testing.assert_almost_equal(state, expected_output, decimal=5)
 
 
 if __name__ == '__main__':

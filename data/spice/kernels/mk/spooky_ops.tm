@@ -46,9 +46,7 @@ Implementation Notes
 
                            '$KERNELS/fk/earth_topo_201023.tf'
                            '$KERNELS/fk/earthfixeditrf93.tf'
-                           '$KERNELS/fk/earthstns_jaxa_20230905.tf'
-                           '$KERNELS/fk/estrack_v04.tf'
-                           '$KERNELS/fk/spooky_gs_v01.tf'
+                           '$KERNELS/fk/spooky_earthstns_20240618.tf'
 
                            '$KERNELS/lsk/naif0012.tls'
 
@@ -59,13 +57,8 @@ Implementation Notes
                            '$KERNELS/pck/earth_000101_240810_240517.bpc'
 
                            '$KERNELS/spk/de432s.bsp'
-                           '$KERNELS/spk/earthstns_itrf93_201023.bsp'
-                           '$KERNELS/spk/earthstns_jaxa_20230905.bsp'
-                           '$KERNELS/spk/estrack_v04.bsp'
 
-                           '$KERNELS/spk/ISS.bsp'
-                           '$KERNELS/spk/spooky_gs_v01.bsp'
-                           '$KERNELS/spk/matlab.bsp'
+                           '$KERNELS/spk/spooky_earthstns_20240618.bsp'
 
                          )
 

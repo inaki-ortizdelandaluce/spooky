@@ -78,8 +78,12 @@ def body_ellipsoid(body):
     return req, f
 
 
-def norad2naif(norad_id):
+def norad2id(norad_id):
     return -100000 - norad_id
+
+
+def name2id(name):
+    return spiceypy.bodn2c(name)
 
 
 def position(target, et, frame, observer, correction='NONE'):
@@ -130,6 +134,13 @@ def state(target, et, frame, observer, correction='NONE'):
         return states[0:3], states[3:6]
 
 
+def geo2rec(lon, lat, alt, body='EARTH'):
+    req, f = body_ellipsoid(body)
+    return spiceypy.georec(spiceypy.convrt(lon, 'DEGREES', 'RADIANS'),
+                           spiceypy.convrt(lat, 'DEGREES', 'RADIANS'),
+                           alt, req, f)
+
+
 def lla2enu(frame, lla):
     """
     Transforms body-fixed geodetic coordinates to cartesian coordinates in a local East-North-Up (ENU) frame.
@@ -145,12 +156,12 @@ def lla2enu(frame, lla):
         result: list
             The cartesian coordinates in the specified local East-North-Up (ENU) frame
     Example:
-        from spooky.utils.spice import Spice
+        import spooky.spice as spice
         lla  = [-5.0362, 56.6657, 0.931]  # Glen Coe, Three Sisters Beinn Fhada
-        mk = Spice.load_metakernel('/Users/iortiz/spice/kernels/spooky/mk/spooky_ops.tm')
-        enu = Spice.lla2enu('HOGS', lla)
+        mk = spice.load_metakernel('/Users/iortiz/spice/kernels/spooky/mk/spooky_ops.tm')
+        enu = spice.lla2enu('HOGS', lla)
         print(enu)  # expected [-105.2305, 85.4909, -0.5178]
-        Spice.unload_metakernel(mk)
+        spice.unload_metakernel(mk)
     """
     from datetime import datetime
     et = spiceypy.str2et(datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%S"))
@@ -194,13 +205,13 @@ def geo2enu(source, target, body='EARTH'):
         result: list of list
             A list of cartesian coordinates in the specified local East-North-Up (ENU) frames
     Example:
-        from spooky.utils.spice import Spice
+        import spooky.spice as spice
         geo0 = [[-3.319995, 55.909723, 0.010]]  # Heriot-Watt Optical Ground Station
         geo  = [[-5.0362, 56.6657, 0.931]]  # Glen Coe, Three Sisters Beinn Fhada
-        mk = Spice.load_metakernel('/Users/iortiz/spice/kernels/spooky/mk/spooky_ops.tm')
-        enu = Spice.geo2enu(geo0, geo)
+        mk = spice.load_metakernel('/Users/iortiz/spice/kernels/spooky/mk/spooky_ops.tm')
+        enu = spice.geo2enu(geo0, geo)
         print(enu)  # expected [-105.2305, 85.4909, -0.5178]
-        Spice.unload_metakernel(mk)
+        spice.unload_metakernel(mk)
     """
     s_geo = np.asarray(source)
     t_geo = np.asarray(target)
@@ -291,7 +302,18 @@ def sub_satellite_point(target, et, frame, observer, correction="XLT+S", method=
     return np.asarray(geo)
 
 
-def write_spk09(file, epochs, states, target, center='EARTH', frame='ITRF93', interpolation=5):
+def write_spk09(file: str, epochs: np.ndarray, states: np.ndarray, body: int, center: str = 'EARTH',
+                frame: str = 'ITRF93', interpolation: int = 5):
+    """
+    Params:
+        file: str
+        epochs: np.ndarray
+        states: np.ndarray
+        target: int
+        center: str
+        frame: str
+        interpolation: int
+    """
     epochs = np.asarray(epochs)
     states = np.asarray(states)
 
@@ -305,7 +327,7 @@ def write_spk09(file, epochs, states, target, center='EARTH', frame='ITRF93', in
         raise TypeError(f"Number of input epochs and states must be equal (${epochs.shape[0]}!=${states.shape[0]})")
 
     # open a new SPK file handle
-    name = f"SPK Type 9 - Target {target} ephemeris from {center} in {frame}"
+    name = f"SPK Type 9 - {body} ephemeris from {center} in {frame}"
     segment_id = f"SPK Type 9 - Segment 0"
     handle = spiceypy.spkopn(file, name, 5000)
 
@@ -313,7 +335,28 @@ def write_spk09(file, epochs, states, target, center='EARTH', frame='ITRF93', in
     etn = epochs[-1]
 
     # write segment
-    spiceypy.spkw09(handle, target, center, frame, et0, etn, segment_id, interpolation, len(epochs), epochs, states)
+    center = name2id(center)
+
+    spiceypy.spkw09(handle, body, center, frame, et0, etn, segment_id, interpolation, len(epochs), states, epochs)
 
     # close the SPK file handle
     spiceypy.spkcls(handle)
+
+
+def llat2spk(body: int, llat_file: str, spk_file: str, center: str = 'EARTH', frame: str = 'ITRF93', et0: float = 0):
+    # read geodetic coordinates and convert to cartesian
+    req, f = body_ellipsoid(center)
+    states = []
+    epochs = []
+    with open(llat_file, 'r') as file:
+        for line in file:
+            llat = line.strip().split(',')
+            xyz = spiceypy.georec(spiceypy.convrt(float(llat[1]), 'DEGREES', 'RADIANS'),  # lon/radians
+                                  spiceypy.convrt(float(llat[0]), 'DEGREES', 'RADIANS'),  # lat/radians
+                                  float(llat[2])/1000.0,                                  # altitude/km
+                                  req, f)
+            states.append(np.concatenate((xyz, np.array([0, 0, 0])), axis=0))  # add zero velocity
+            epochs.append(et0 + float(llat[3]))
+    # write spk
+    write_spk09(spk_file, epochs, states, body, center, frame)
+    return spk_file
