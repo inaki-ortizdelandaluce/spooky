@@ -12,6 +12,7 @@ spiceypy = "^6.0.0"
 scipy = "^1.13.0"
 matplotlib = "^3.9.0"
 cartopy = "^0.23.0"
+geopy = "^2.4.1"
 
 [build-system]
 requires = ["poetry-core"]
