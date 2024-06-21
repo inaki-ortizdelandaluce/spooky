@@ -1,7 +1,14 @@
-import numpy as np
 from spooky.components.detector import Detector, SpectralFilter, load_preset_name
+from spooky.components.telescope import Telescope
+from spooky.nodes.groundstation import GroundStation
+from spooky.units.magnitude import Magnitude
+from spooky.utils.geometry import earth_los_distance, move_along_earth_surface
+import numpy as np
 import matplotlib as mpl
 import matplotlib.pyplot as plt
+import cartopy.crs as ccrs
+import cartopy.feature as cfeature
+
 mpl.use('TkAgg')
 
 
@@ -105,53 +112,73 @@ def plot_detector(detector: Detector):
     plt.show()
 
 
-def plot_groundstation_los(altitude: float):
-    pass
+def plot_groundstation_los(groundstation: GroundStation, altitude: float):
+    """
+    Plots satellite visibility from ground station in a plate carree map projection.
+    Params:
+        gs: spooky.nodes.groundstation.GroundStation
+            Ground station object.
+        altitude: float
+            Satellite's altitude in kilometers.
+    """
+    delta_lon = 10
+    delta_lat = 5
+
+    # create a new plot with a specified projection
+    _, ax = plt.subplots(subplot_kw={'projection': ccrs.Mercator()})
+    ax.set_extent([groundstation.longitude - delta_lon, groundstation.longitude + delta_lon,
+                   groundstation.latitude - delta_lat, groundstation.latitude + delta_lat],
+                  crs=ccrs.PlateCarree())
+
+    # add geographic features
+    ax.add_feature(cfeature.COASTLINE)
+    ax.add_feature(cfeature.BORDERS)
+    ax.add_feature(cfeature.LAND)
+
+    # plot the ground station
+    ax.plot(groundstation.longitude, groundstation.latitude, marker='+', markersize=10, color='b', linestyle='None',
+            alpha=0.7, transform=ccrs.Geodetic(), label=groundstation.name)
+
+    # plot the ground station's los distance and move along surface
+    distance = earth_los_distance(altitude, groundstation.elevation_limit)
+
+    los_lon = []
+    los_lat = []
+    for heading in range(0, 365, 5):
+        lon, lat, _ = move_along_earth_surface(groundstation.longitude,
+                                               groundstation.latitude,
+                                               groundstation.altitude / 1000,
+                                               distance,
+                                               heading)
+        los_lon.append(lon)
+        los_lat.append(lat)
+
+    ax.plot(los_lon, los_lat, 'g--', markersize=2, alpha=0.7, transform=ccrs.Geodetic())
+
+    # add gridlines and labels
+    ax.gridlines(draw_labels=True)
+
+    # add a title and legend
+    # plt.title(f'{gs.name} Line Of Sight visibility')
+    plt.legend()
+    plt.show()
 
 
 if __name__ == "__main__":
-    """
     wavelength = 780
     time_gate_width = 1e-9
     spectral_filter_width = 10
     repetition_rate = 1e8  # from transmitter
     preset = load_preset_name("PerkinElmer")
 
-    d = Detector(wavelength=wavelength,
-                 repetition_rate=repetition_rate,
-                 time_gate_width=time_gate_width,
-                 spectral_filter=spectral_filter_width,
-                 preset=preset)
-    plot_detector(d)
-    """
+    detector = Detector(wavelength=wavelength,
+                        repetition_rate=repetition_rate,
+                        time_gate_width=time_gate_width,
+                        spectral_filter=spectral_filter_width,
+                        preset=preset)
+    # plot_detector(detector)
 
-    import cartopy.crs as ccrs
-    import cartopy.feature as cfeature
-
-    # Define the latitude and longitude points
-    lat = [34.05, 36.16, 40.71, 47.61]
-    lon = [-118.24, -115.15, -74.00, -122.33]
-
-    # Create a new plot with a specified projection
-    fig, ax = plt.subplots(subplot_kw={'projection': ccrs.PlateCarree()})
-    ax.set_extent([-130, -65, 25, 50], crs=ccrs.PlateCarree())  # Set the extent (lon_min, lon_max, lat_min, lat_max)
-
-    # Add geographic features
-    ax.add_feature(cfeature.COASTLINE)
-    ax.add_feature(cfeature.BORDERS)
-    ax.add_feature(cfeature.LAND)
-    ax.add_feature(cfeature.LAKES, alpha=0.5)
-    ax.add_feature(cfeature.RIVERS)
-
-    # Plot the data
-    ax.plot(lon, lat, '-o', transform=ccrs.PlateCarree(), label='Path')
-
-    # Add gridlines and labels
-    ax.gridlines(draw_labels=True)
-
-    # Add a title and legend
-    plt.title('Geoplot Example')
-    plt.legend()
-
-    # Show the plot
-    plt.show()
+    telescope = Telescope(diameter=1, wavelength=780, wavelength_scale=Magnitude.nano)
+    ground_station = GroundStation(name='HOGS', lat=55.909723, lon=-3.319995, alt=10,
+                                   telescope=telescope, detector=detector, elevation_limit=30)
+    # plot_groundstation_los(ground_station, 100)

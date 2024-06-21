@@ -55,14 +55,14 @@ def earth_los_angle(altitude: float, min_elevation: float, earth_radius=6371.008
     return math.degrees(math.acos(e**2 * f + math.sqrt(e**4 * f**2 - e**2 * (1 + f**2) + 1)))
 
 
-def move_along_earth_surface(lon: float, lat: float, altitude: float, distance: float, bearing: float):
+def move_along_earth_surface(longitude: float, latitude: float, altitude: float, distance: float, bearing: float):
     """
     Move along Earth's surface a given distance from a starting position along a given direction via the corresponding
     geodesic.
     Params:
-        lon: float
+        longitude: float
             Longitude of the starting position in degrees.
-        lat: float
+        latitude: float
             Latitude of the starting position in degrees.
         altitude: float
             Altitude of the starting position in kilometers.
@@ -81,7 +81,7 @@ def move_along_earth_surface(lon: float, lat: float, altitude: float, distance: 
          print(lon. lat, alt)  # expected values: -3.319995, 58.915760, 0
     """
     # FIXME replace by analytic formula to get rid of geopy dependency
-    p = Point(lat, lon, altitude)
+    p = Point(latitude, longitude, altitude)
     dest = geodesic(kilometers=distance).destination(p, bearing=bearing)  # uses WGS-84, aligned with spice
     return dest.longitude, dest.latitude, dest.altitude
 

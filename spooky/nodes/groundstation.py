@@ -38,6 +38,30 @@ class GroundStation(QKDReceiver, QKDTransmitter):
     def detector(self) -> Detector:
         return self._detector
 
+    @property
+    def lla(self):
+        return self._lla
+
+    @property
+    def longitude(self):
+        return self._lla[1]
+
+    @property
+    def latitude(self):
+        return self._lla[0]
+
+    @property
+    def altitude(self):
+        return self._lla[2]
+
+    @property
+    def elevation_limit(self):
+        return self._elevation_limit
+
+    @property
+    def name(self):
+        return self._name
+
     def compute_total_background_count_rate(self, background_sources, qkd_transmitter, headings, elevations,
                                             smarts_configuration, count_map):
         pass
@@ -51,5 +75,7 @@ class GroundStation(QKDReceiver, QKDTransmitter):
         if not self._detector:
             self._detector.set_wavelength(wavelength, wavelength_scale)
         self._telescope.set_wavelength(wavelength, wavelength_scale)
+
+
 
 
