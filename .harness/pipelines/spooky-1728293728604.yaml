@@ -20,11 +20,13 @@ pipeline:
                     shell: Sh
                     command: echo "Welcome to Harness CI"
           platform:
-            os: Linux
-            arch: Amd64
+            os: MacOS
+            arch: Arm64
           runtime:
             type: Docker
             spec: {}
+        delegateSelectors:
+          - docker-delegate
   properties:
     ci:
       codebase:
