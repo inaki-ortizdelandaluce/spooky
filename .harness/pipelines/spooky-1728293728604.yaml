@@ -1,0 +1,33 @@
+pipeline:
+  name: Build spooky
+  identifier: Build_inaki_ortizdelandaluce_spooky_1728293742969
+  projectIdentifier: Labs
+  orgIdentifier: default
+  stages:
+    - stage:
+        name: Build
+        identifier: Build
+        type: CI
+        spec:
+          cloneCodebase: true
+          execution:
+            steps:
+              - step:
+                  type: Run
+                  name: Echo Welcome Message
+                  identifier: Echo_Welcome_Message
+                  spec:
+                    shell: Sh
+                    command: echo "Welcome to Harness CI"
+          platform:
+            os: Linux
+            arch: Amd64
+          runtime:
+            type: Docker
+            spec: {}
+  properties:
+    ci:
+      codebase:
+        connectorRef: account.Github
+        repoName: inaki-ortizdelandaluce/spooky
+        build: <+input>
