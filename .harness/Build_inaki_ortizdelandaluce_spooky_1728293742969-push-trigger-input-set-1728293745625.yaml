@@ -1,0 +1,14 @@
+inputSet:
+  name: Build_inaki_ortizdelandaluce_spooky_1728293742969-push-trigger-input-set
+  identifier: Build_inaki_ortizdelandaluce_spooky_1728293742969pushtriggerinputset
+  orgIdentifier: default
+  projectIdentifier: Labs
+  pipeline:
+    identifier: Build_inaki_ortizdelandaluce_spooky_1728293742969
+    properties:
+      ci:
+        codebase:
+          build:
+            type: branch
+            spec:
+              branch: <+trigger.branch>
