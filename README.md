@@ -35,17 +35,3 @@ poetry remove package
 poetry shell
 poetry show --tree
 ````
-
-## Qrackling set-up
-````
-Files (Right Click) > Source Control > Clone Git Repository
-URL: https://github.com/Free-Space-QKD-Lab-HWU/Qrackling.git
-Folders location: /MATLAB Drive/Qrackling-YYYYMMDD
->> cd Qrackling-YYYYMMDD
->> examples_path = genpath('Examples');
->> uplink_path = genpath('uplink_adaptive_optics');
->> addpath(examples_path);
->> addpath(uplink_path);
->> savepath
->> ExampleOrbitBB84
-````
